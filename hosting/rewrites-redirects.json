@@ -1,0 +1,50 @@
+{
+  "rewrites": [
+    {
+      "comment": "SEO - Sitemap et robots",
+      "source": "/sitemap.xml",
+      "destination": "/api/seo/sitemap"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/api/seo/robots"
+    },
+    {
+      "comment": "Redirections marketing",
+      "source": "/start",
+      "destination": "/dashboard"
+    },
+    {
+      "source": "/try-free",
+      "destination": "/api/auth/login"
+    },
+    {
+      "source": "/upgrade",
+      "destination": "/pricing"
+    }
+  ],
+  "redirects": [
+    {
+      "comment": "Anciennes URLs",
+      "source": "/app",
+      "destination": "/dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/signup",
+      "destination": "/api/auth/login",
+      "permanent": false
+    },
+    {
+      "source": "/signin",
+      "destination": "/api/auth/login",
+      "permanent": false
+    },
+    {
+      "comment": "Redirection HTTPS en développement",
+      "source": "/http(:?)",
+      "destination": "https://auraandlogos.com",
+      "permanent": true
+    }
+  ]
+}

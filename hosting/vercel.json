@@ -1,0 +1,107 @@
+{
+  "version": 2,
+  "name": "aura-and-logos",
+  "framework": "nextjs",
+  "regions": ["cdg1"],
+  "functions": {
+    "api/generation/**/*.ts": {
+      "maxDuration": 300,
+      "memory": 1024
+    },
+    "api/payment/webhook.ts": {
+      "maxDuration": 10,
+      "memory": 256
+    },
+    "api/generation/voice.ts": {
+      "maxDuration": 120,
+      "memory": 512
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/api/robots"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/app",
+      "destination": "/dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/login",
+      "destination": "/api/auth/login",
+      "permanent": false
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_APP_URL": "https://aura-and-logos.vercel.app"
+  },
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "staging": true,
+      "develop": false
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/crons/cleanup-expired",
+      "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/crons/reset-monthly-quotas",
+      "schedule": "0 0 1 * *"
+    },
+    {
+      "path": "/api/crons/send-usage-reports",
+      "schedule": "0 12 * * 1"
+    }
+  ]
+}

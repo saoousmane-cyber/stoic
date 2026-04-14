@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none">
+  <defs>
+    <linearGradient id="auraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="50%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#d946ef"/>
+    </linearGradient>
+    <linearGradient id="logosGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#ef4444"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icône AURA -->
+  <circle cx="45" cy="60" r="30" fill="url(#auraGrad)" opacity="0.15"/>
+  <circle cx="45" cy="60" r="22" fill="url(#auraGrad)" opacity="0.3"/>
+  <circle cx="45" cy="60" r="14" fill="url(#auraGrad)" opacity="0.6"/>
+  <circle cx="45" cy="60" r="6" fill="#ffffff"/>
+
+  <!-- Texte AURA -->
+  <text x="90" y="72" font-family="'Inter', system-ui, sans-serif" font-weight="800" font-size="48" fill="url(#auraGrad)">AURA</text>
+
+  <!-- & -->
+  <text x="210" y="72" font-family="'Inter', system-ui, sans-serif" font-weight="600" font-size="32" fill="#6b7280">&amp;</text>
+
+  <!-- LOGOS -->
+  <text x="245" y="72" font-family="'Inter', system-ui, sans-serif" font-weight="800" font-size="48" fill="url(#logosGrad)">LOGOS</text>
+
+  <!-- Tagline -->
+  <text x="90" y="100" font-family="'Inter', system-ui, sans-serif" font-weight="400" font-size="14" fill="#9ca3af" letter-spacing="2">CRÉATEUR AUTOMATISÉ DE CONTENU</text>
+</svg>
