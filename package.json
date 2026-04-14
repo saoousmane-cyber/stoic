@@ -9,8 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "clean": "rm -rf .next node_modules",
-    "postinstall": "prisma generate"
+    "clean": "rm -rf .next node_modules"
   },
   "dependencies": {
     "@auth/supabase-adapter": "^1.11.1",
