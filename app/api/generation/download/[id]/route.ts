@@ -1,6 +1,3 @@
-// AURA & LOGOS - API de téléchargement d'une génération
-// GET /api/generation/download/[id]
-
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth/auth.config'
@@ -13,7 +10,7 @@ const supabase = createClient(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -26,7 +23,7 @@ export async function GET(
     }
 
     const userId = session.user.id || session.user.email
-    const { id } = params
+    const { id } = await params
     const format = request.nextUrl.searchParams.get('format') || 'zip'
 
     if (!id) {
@@ -36,7 +33,6 @@ export async function GET(
       )
     }
 
-    // Récupérer la génération
     const { data: generation, error } = await supabase
       .from('generations')
       .select('*')
@@ -50,7 +46,6 @@ export async function GET(
       )
     }
 
-    // Vérifier que l'utilisateur est bien le propriétaire
     if (generation.user_id !== userId) {
       return NextResponse.json(
         { error: 'Accès non autorisé' },
@@ -58,7 +53,6 @@ export async function GET(
       )
     }
 
-    // Vérifier que la génération est terminée
     if (generation.status !== 'completed') {
       return NextResponse.json(
         { error: 'Génération non terminée' },
@@ -67,32 +61,32 @@ export async function GET(
     }
 
     let downloadUrl: string | null = null
-    let filename = `generation-${id}`
+    let filename: string = `generation-${id}`
 
     switch (format) {
       case 'zip':
         downloadUrl = generation.zip_url
-        filename += '.zip'
+        filename = `${filename}.zip`
         break
       case 'audio':
         downloadUrl = generation.audio_url
-        filename += '.mp3'
+        filename = `${filename}.mp3`
         break
       case 'srt':
         downloadUrl = generation.srt_url
-        filename += '.srt'
+        filename = `${filename}.srt`
         break
       case 'vtt':
         downloadUrl = generation.vtt_url
-        filename += '.vtt'
+        filename = `${filename}.vtt`
         break
       case 'json':
         downloadUrl = generation.json_url
-        filename += '.json'
+        filename = `${filename}.json`
         break
       default:
         downloadUrl = generation.zip_url
-        filename += '.zip'
+        filename = `${filename}.zip`
     }
 
     if (!downloadUrl) {
@@ -103,9 +97,18 @@ export async function GET(
     }
 
     // Télécharger le fichier depuis l'URL
-    const response = await fetch(downloadUrl)
-    const buffer = Buffer.from(await response.arrayBuffer())
+    const fileResponse = await fetch(downloadUrl)
+    
+    if (!fileResponse.ok) {
+      return NextResponse.json(
+        { error: 'Erreur lors du téléchargement du fichier' },
+        { status: 500 }
+      )
+    }
 
+    // Récupérer le buffer de manière compatible
+    const fileData = await fileResponse.arrayBuffer()
+    
     // Déterminer le type MIME
     const mimeTypes: Record<string, string> = {
       zip: 'application/zip',
@@ -117,11 +120,12 @@ export async function GET(
     const ext = format === 'audio' ? 'mp3' : format
     const mimeType = mimeTypes[ext] || 'application/octet-stream'
 
-    return new NextResponse(new Uint8Array(buffer), {
+    // Créer la réponse avec les données brutes
+    return new NextResponse(fileData, {
       headers: {
         'Content-Type': mimeType,
         'Content-Disposition': `attachment; filename="${filename}"`,
-        'Content-Length': buffer.length.toString(),
+        'Content-Length': fileData.byteLength.toString(),
         'Cache-Control': 'private, no-cache, no-store, must-revalidate',
       },
     })
