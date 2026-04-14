@@ -95,17 +95,3 @@ export async function middleware(request: NextRequest) {
   
   return response
 }
-
-// Configuration des routes où le middleware s'exécute
-export const config = {
-  matcher: [
-    /*
-     * Match toutes les routes sauf :
-     * - _next/static (fichiers statiques)
-     * - _next/image (optimisation images)
-     * - favicon.ico
-     * - fichiers statiques (.svg, .png, .css, .js)
-     */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|css|js)$).*)'
-  ]
-}
