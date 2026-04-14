@@ -58,6 +58,7 @@ const nextConfig = {
       }
     ]
   },
+  
 
   // Webpack personnalisé
   webpack: (config, { isServer, dev }) => {

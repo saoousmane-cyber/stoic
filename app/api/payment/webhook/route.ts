@@ -3,7 +3,9 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { handleStripeWebhook } from '@/lib/payment/stripe-webhook'
-
+// Désactiver le body parser pour Stripe
+export const dynamic = 'force-static'
+export const runtime = 'nodejs'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.text()
@@ -29,9 +31,3 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Désactiver le body parser pour Stripe (nécessite le raw body)
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
