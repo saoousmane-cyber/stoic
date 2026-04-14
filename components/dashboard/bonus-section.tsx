@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { BonusCard } from '@/p3_frontend_landing/components/bonus/bonus-card'
-import { BonusProgress } from '@/p3_frontend_landing/components/bonus/bonus-progress'
+import { BonusCard } from '@/components/bonus/bonus-card'
+import { BonusProgress } from '@/components/bonus/bonus-progress'
 import { useBonus } from '@/hooks/use-bonus'
 
 export function BonusSection() {

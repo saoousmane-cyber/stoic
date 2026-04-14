@@ -1,7 +1,7 @@
 // AURA & LOGOS - Gestionnaire d'effets sonores
 // Combine les effets sonores avec l'audio principal
 
-import { SoundEffectPlacement, getSoundEffectUrl } from '@/p2_generation_engine/services/sound-effects'
+import { SoundEffectPlacement, getSoundEffectUrl } from '@/services/sound-effects'
 
 export interface SoundEffectMixParams {
   mainAudioBuffer: Buffer

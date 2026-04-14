@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { BonusConfetti } from '@/p3_frontend_landing/components/bonus/bonus-confetti'
+import { BonusConfetti } from '@/components/bonus/bonus-confetti'
 import { useBonus } from '@/hooks/use-bonus'
 
 interface PaymentSuccessProps {

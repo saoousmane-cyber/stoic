@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useGeneration } from '@/hooks/use-generation'
 import { useQuota } from '@/hooks/use-quota'
 import { useToast } from '@/hooks/use-toast'
-import { LoginPopup, useLoginPopup } from '@/p3_frontend_landing/components/popup/login-popup'
+import { LoginPopup, useLoginPopup } from '@/components/popup/login-popup'
 
 interface GenerationFormProps {
   onSuccess?: (generationId: string) => void

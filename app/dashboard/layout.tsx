@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Sidebar } from '@/p3_frontend_landing/components/layout/sidebar'
-import { Navbar } from '@/p3_frontend_landing/components/layout/navbar'
+import { Sidebar } from '@/components/layout/sidebar'
+import { Navbar } from '@/components/layout/navbar'
 
 export default function DashboardLayout({
   children,

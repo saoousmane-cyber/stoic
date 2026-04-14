@@ -1,7 +1,7 @@
 // AURA & LOGOS - Limiteur pour plan gratuit
 // Gestion des restrictions du plan gratuit
 
-import { FREE_TIER_MINUTES_PER_MONTH, FREE_TIER_GENERATIONS_PER_MONTH } from '@/p1_fondations_branding/config/constants'
+import { FREE_TIER_MINUTES_PER_MONTH, FREE_TIER_GENERATIONS_PER_MONTH } from '@/config/constants'
 
 export interface FreeTierLimits {
   maxMinutesPerMonth: number

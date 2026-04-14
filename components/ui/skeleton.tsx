@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/p4_auth_payment_free/utils'
+import { cn } from '@/lib/utils'
 
 function Skeleton({
   className,

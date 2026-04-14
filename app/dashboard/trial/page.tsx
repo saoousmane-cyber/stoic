@@ -6,11 +6,11 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { TrialStatusCard } from '@/p3_frontend_landing/components/trial/trial-status-card'
-import { TrialTimer } from '@/p3_frontend_landing/components/trial/trial-timer'
-import { TrialUsageChart } from '@/p3_frontend_landing/components/trial/trial-usage-chart'
-import { RefundModal } from '@/p3_frontend_landing/components/trial/refund-modal'
-import { TrialFAQ } from '@/p3_frontend_landing/components/trial/trial-faq'
+import { TrialStatusCard } from '@/components/trial/trial-status-card'
+import { TrialTimer } from '@/components/trial/trial-timer'
+import { TrialUsageChart } from '@/components/trial/trial-usage-chart'
+import { RefundModal } from '@/components/trial/refund-modal'
+import { TrialFAQ } from '@/components/trial/trial-faq'
 import { usePrepaidTrial } from '@/hooks/use-prepaid-trial'
 
 export default function TrialManagementPage() {
