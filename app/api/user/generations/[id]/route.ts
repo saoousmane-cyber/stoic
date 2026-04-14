@@ -1,7 +1,3 @@
-// AURA & LOGOS - API de gestion d'une génération spécifique
-// GET /api/user/generations/[id] - Récupérer une génération
-// DELETE /api/user/generations/[id] - Supprimer une génération
-
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth/auth.config'
@@ -12,10 +8,9 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-// GET - Récupérer une génération spécifique
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -28,7 +23,7 @@ export async function GET(
     }
 
     const userId = session.user.id || session.user.email
-    const { id } = params
+    const { id } = await params
 
     if (!id) {
       return NextResponse.json(
@@ -50,7 +45,6 @@ export async function GET(
       )
     }
 
-    // Vérifier que l'utilisateur est bien le propriétaire
     if (generation.user_id !== userId) {
       return NextResponse.json(
         { error: 'Accès non autorisé' },
@@ -85,10 +79,9 @@ export async function GET(
   }
 }
 
-// DELETE - Supprimer une génération
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -101,7 +94,7 @@ export async function DELETE(
     }
 
     const userId = session.user.id || session.user.email
-    const { id } = params
+    const { id } = await params
 
     if (!id) {
       return NextResponse.json(
@@ -110,7 +103,6 @@ export async function DELETE(
       )
     }
 
-    // Vérifier que la génération existe et appartient à l'utilisateur
     const { data: generation, error: fetchError } = await supabase
       .from('generations')
       .select('user_id')
@@ -131,7 +123,6 @@ export async function DELETE(
       )
     }
 
-    // Supprimer la génération
     const { error: deleteError } = await supabase
       .from('generations')
       .delete()

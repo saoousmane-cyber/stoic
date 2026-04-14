@@ -1,6 +1,3 @@
-// AURA & LOGOS - API pour obtenir le statut d'une génération
-// GET /api/generation/status/[id]
-
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth/auth.config'
@@ -13,7 +10,7 @@ const supabase = createClient(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -25,7 +22,7 @@ export async function GET(
       )
     }
 
-    const { id } = params
+    const { id } = await params
 
     if (!id) {
       return NextResponse.json(
@@ -34,7 +31,6 @@ export async function GET(
       )
     }
 
-    // Récupérer la génération
     const { data: generation, error } = await supabase
       .from('generations')
       .select('*')
@@ -48,7 +44,6 @@ export async function GET(
       )
     }
 
-    // Vérifier que l'utilisateur est bien le propriétaire
     const userId = session.user.id || session.user.email
     if (generation.user_id !== userId) {
       return NextResponse.json(

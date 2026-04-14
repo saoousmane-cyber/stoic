@@ -1,6 +1,3 @@
-// AURA & LOGOS - API pour annuler une génération en cours
-// DELETE /api/generation/cancel/[id]
-
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth/auth.config'
@@ -11,12 +8,11 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-// Stockage des annulations en mémoire (à remplacer par Redis en production)
 const cancelledGenerations = new Set<string>()
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -28,7 +24,7 @@ export async function DELETE(
       )
     }
 
-    const { id } = params
+    const { id } = await params
 
     if (!id) {
       return NextResponse.json(
@@ -37,7 +33,6 @@ export async function DELETE(
       )
     }
 
-    // Récupérer la génération
     const { data: generation, error } = await supabase
       .from('generations')
       .select('*')
@@ -51,7 +46,6 @@ export async function DELETE(
       )
     }
 
-    // Vérifier que l'utilisateur est bien le propriétaire
     const userId = session.user.id || session.user.email
     if (generation.user_id !== userId) {
       return NextResponse.json(
@@ -60,7 +54,6 @@ export async function DELETE(
       )
     }
 
-    // Vérifier que la génération est encore annulable
     if (generation.status !== 'pending' && generation.status !== 'processing') {
       return NextResponse.json(
         { error: 'Cette génération ne peut plus être annulée' },
@@ -68,10 +61,8 @@ export async function DELETE(
       )
     }
 
-    // Marquer comme annulée
     cancelledGenerations.add(id)
 
-    // Mettre à jour le statut dans la base de données
     await supabase
       .from('generations')
       .update({
@@ -100,7 +91,6 @@ export async function DELETE(
   }
 }
 
-// Fonction utilitaire pour vérifier si une génération est annulée
 export function isGenerationCancelled(generationId: string): boolean {
   return cancelledGenerations.has(generationId)
 }

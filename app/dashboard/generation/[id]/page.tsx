@@ -1,6 +1,3 @@
-// AURA & LOGOS - Page de détail d'une génération
-// /dashboard/generation/[id]
-
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -48,14 +45,13 @@ export default function GenerationDetailPage() {
   const handleRegenerate = async () => {
     if (!generation) return
     
-    // Rediriger vers la page de génération avec les paramètres pré-remplis
-    const params = new URLSearchParams({
+    const queryParams = new URLSearchParams({
       topic: generation.topic,
       niche: generation.niche,
       language: generation.language,
       duration: generation.duration.toString(),
     })
-    router.push(`/dashboard/generate?${params.toString()}`)
+    router.push(`/dashboard/generate?${queryParams.toString()}`)
   }
 
   const handleClose = () => {
@@ -115,7 +111,6 @@ export default function GenerationDetailPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="container mx-auto px-4 max-w-4xl">
-        {/* Bouton retour */}
         <div className="mb-6">
           <button
             onClick={() => router.back()}
@@ -128,7 +123,6 @@ export default function GenerationDetailPage() {
           </button>
         </div>
 
-        {/* Détail de la génération */}
         <GenerationDetail
           generationId={id}
           onClose={handleClose}
@@ -136,7 +130,6 @@ export default function GenerationDetailPage() {
           onRegenerate={handleRegenerate}
         />
 
-        {/* Actions supplémentaires */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
