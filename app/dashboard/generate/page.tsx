@@ -1,5 +1,6 @@
 // AURA & LOGOS - Page de génération de contenu
 // /dashboard/generate
+export const dynamic = 'force-dynamic'
 
 'use client'
 

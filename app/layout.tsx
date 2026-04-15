@@ -2,9 +2,9 @@
 
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
-import './globals.css'
-import { Providers } from './providers'
 
+import { Providers } from './providers'
+<body className="font-sans antialiased bg-gray-50 dark:bg-gray-900"></body>
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',

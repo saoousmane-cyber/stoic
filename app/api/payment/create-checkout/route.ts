@@ -1,4 +1,5 @@
 // AURA & LOGOS - API de création de checkout avec redirection vers page de succès
+export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'

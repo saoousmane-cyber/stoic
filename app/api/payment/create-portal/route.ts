@@ -1,5 +1,6 @@
 // AURA & LOGOS - API de création du portail client Stripe
 // POST /api/payment/create-portal
+export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'

@@ -1,6 +1,7 @@
 // AURA & LOGOS - API de gestion des quotas
 // GET /api/user/quota - Récupérer les quotas
 // POST /api/user/quota - Mettre à jour (incrémenter)
+export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'

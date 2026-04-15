@@ -2,6 +2,7 @@
 // GET /api/user/profile - Récupérer le profil
 // PUT /api/user/profile - Mettre à jour le profil
 // DELETE /api/user/profile - Supprimer le compte
+export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
