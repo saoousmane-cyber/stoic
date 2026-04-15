@@ -1,7 +1,7 @@
 {
   "name": "aura-and-logos",
   "version": "1.0.0",
-  "description": "Générateur automatisé de contenu vidéo/audio pour créateurs (stoïcisme, méditation, histoire, philosophie, etc.)",
+  "description": "Générateur automatisé de contenu vidéo/audio pour créateurs",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -56,7 +56,7 @@
     "mime-types": "^2.1.35",
     "multer": "^1.4.5-lts.1",
     "nanoid": "^5.0.4",
-    "next": "^16.2.3",
+    "next": "^14.2.0",
     "next-auth": "^4.24.5",
     "next-i18next": "^15.2.0",
     "next-seo": "^6.4.0",
@@ -127,21 +127,5 @@
   "engines": {
     "node": ">=18.17.0",
     "npm": ">=9.0.0"
-  },
-  "keywords": [
-    "video-generation",
-    "ai-content",
-    "youtube-automation",
-    "tts",
-    "stoicism",
-    "meditation",
-    "history",
-    "philosophy"
-  ],
-  "author": "AURA & LOGOS",
-  "license": "UNLICENSED",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/auraandlogos/aura-and-logos.git"
   }
 }
