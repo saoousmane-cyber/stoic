@@ -1,12 +1,10 @@
 // AURA & LOGOS - Layout racine
-// Next.js App Router avec metadata, polices, et providers
 
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
 
-// Polices
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -19,8 +17,10 @@ const playfair = Playfair_Display({
   display: 'swap',
 })
 
-// Métadonnées SEO
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://stoic.vercel.app'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(APP_URL),
   title: {
     default: 'AURA & LOGOS | Générateur de contenu vidéo/audio pour créateurs',
     template: '%s | AURA & LOGOS',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://auraandlogos.com',
+    url: APP_URL,
     siteName: 'AURA & LOGOS',
     title: 'AURA & LOGOS - Générateur de contenu pour créateurs',
     description: 'Créez des vidéos qui captivent. Sans monter. Sans tourner. Sans stress.',
@@ -68,11 +68,11 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   alternates: {
-    canonical: 'https://auraandlogos.com',
+    canonical: APP_URL,
     languages: {
-      'fr': 'https://auraandlogos.com/fr',
-      'en': 'https://auraandlogos.com/en',
-      'es': 'https://auraandlogos.com/es',
+      'fr': `${APP_URL}/fr`,
+      'en': `${APP_URL}/en`,
+      'es': `${APP_URL}/es`,
     },
   },
   category: 'technology',

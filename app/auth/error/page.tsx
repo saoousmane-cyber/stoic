@@ -1,35 +1,28 @@
-// AURA & LOGOS - Page d'erreur d'authentification
-// /auth/error
-
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 
-export default function AuthErrorPage() {
+function ErrorContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const [errorMessage, setErrorMessage] = useState('Une erreur est survenue lors de l\'authentification.')
+  const error = searchParams.get('error')
+  
+  const errorMessages: Record<string, string> = {
+    OAuthSignin: 'Erreur lors de la connexion avec Google. Veuillez réessayer.',
+    OAuthCallback: 'Erreur lors de la validation Google. Veuillez réessayer.',
+    OAuthCreateAccount: 'Impossible de créer votre compte. Veuillez réessayer.',
+    EmailCreateAccount: 'Impossible de créer votre compte avec cet email.',
+    Callback: 'Erreur lors de la validation de la connexion.',
+    OAuthAccountNotLinked: 'Cet email est déjà utilisé avec une autre méthode de connexion.',
+    EmailSignin: 'Erreur lors de l\'envoi de l\'email de connexion.',
+    CredentialsSignin: 'Identifiants invalides.',
+    SessionRequired: 'Vous devez être connecté pour accéder à cette page.',
+    Default: 'Une erreur est survenue. Veuillez réessayer.',
+  }
 
-  useEffect(() => {
-    const error = searchParams.get('error')
-    
-    const errorMessages: Record<string, string> = {
-      OAuthSignin: 'Erreur lors de la connexion avec Google. Veuillez réessayer.',
-      OAuthCallback: 'Erreur lors de la validation Google. Veuillez réessayer.',
-      OAuthCreateAccount: 'Impossible de créer votre compte. Veuillez réessayer.',
-      EmailCreateAccount: 'Impossible de créer votre compte avec cet email.',
-      Callback: 'Erreur lors de la validation de la connexion.',
-      OAuthAccountNotLinked: 'Cet email est déjà utilisé avec une autre méthode de connexion.',
-      EmailSignin: 'Erreur lors de l\'envoi de l\'email de connexion.',
-      CredentialsSignin: 'Identifiants invalides.',
-      SessionRequired: 'Vous devez être connecté pour accéder à cette page.',
-      Default: 'Une erreur est survenue. Veuillez réessayer.',
-    }
-
-    setErrorMessage(errorMessages[error || 'Default'] || errorMessages.Default)
-  }, [searchParams])
+  const errorMessage = errorMessages[error || 'Default'] || errorMessages.Default
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
@@ -40,7 +33,6 @@ export default function AuthErrorPage() {
         className="max-w-md w-full"
       >
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
-          {/* En-tête */}
           <div className="bg-gradient-to-r from-red-500 to-red-600 p-6 text-center">
             <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,11 +42,8 @@ export default function AuthErrorPage() {
             <h1 className="text-2xl font-bold text-white">Erreur d'authentification</h1>
           </div>
 
-          {/* Contenu */}
           <div className="p-6 text-center">
-            <p className="text-gray-700 dark:text-gray-300 mb-6">
-              {errorMessage}
-            </p>
+            <p className="text-gray-700 dark:text-gray-300 mb-6">{errorMessage}</p>
 
             <div className="space-y-3">
               <button
@@ -73,7 +62,6 @@ export default function AuthErrorPage() {
             </div>
           </div>
 
-          {/* Footer */}
           <div className="px-6 py-4 bg-gray-50 dark:bg-gray-900/50 text-center">
             <p className="text-xs text-gray-400">
               Si l'erreur persiste, contactez notre support :{' '}
@@ -84,7 +72,6 @@ export default function AuthErrorPage() {
           </div>
         </div>
 
-        {/* Conseils */}
         <div className="mt-4 text-center text-xs text-gray-400">
           <p>Conseils :</p>
           <ul className="mt-1 space-y-1">
@@ -95,5 +82,17 @@ export default function AuthErrorPage() {
         </div>
       </motion.div>
     </div>
+  )
+}
+
+export default function AuthErrorPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600" />
+      </div>
+    }>
+      <ErrorContent />
+    </Suspense>
   )
 }
