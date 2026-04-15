@@ -1,6 +1,6 @@
 // AURA & LOGOS - API proxy pour Plausible Analytics
 // POST /api/analytics/plausible
-
+export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {

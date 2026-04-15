@@ -1,6 +1,6 @@
 // AURA & LOGOS - API de vérification des limites plan gratuit
 // GET /api/free/check-limits - Vérifier si l'utilisateur peut générer
-
+export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth/auth.config'

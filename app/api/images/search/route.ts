@@ -1,6 +1,6 @@
 // AURA & LOGOS - API de recherche d'images (Pixabay + Pexels)
 // GET /api/images/search?q=...&niche=...&page=...&limit=...
-
+export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth/auth.config'

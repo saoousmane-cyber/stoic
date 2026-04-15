@@ -1,6 +1,6 @@
 // AURA & LOGOS - API de recherche d'articles de blog
 // GET /api/blog/search?q=...&category=...&page=...&limit=...
-
+export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 
 // Données mock des articles (à remplacer par une vraie base de données)
