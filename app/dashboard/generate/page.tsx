@@ -1,6 +1,5 @@
 'use client'
 
-// AURA & LOGOS - Page de génération de contenu
 // /dashboard/generate
 export const dynamic = 'force-dynamic'
 
@@ -20,7 +19,6 @@ export default function GeneratePage() {
 
   const handleSuccess = (id: string) => {
     setGenerationId(id)
-    // Option: rediriger vers la page de détail après 2 secondes
     setTimeout(() => {
       router.push(`/dashboard/generation/${id}`)
     }, 2000)
@@ -28,7 +26,6 @@ export default function GeneratePage() {
 
   return (
     <div className="space-y-6">
-      {/* En-tête */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
           ✨ Nouvelle génération
@@ -38,21 +35,16 @@ export default function GeneratePage() {
         </p>
       </div>
 
-      {/* Bannière bonus si disponible */}
       {hasBonus && <BonusBanner />}
 
-      {/* Grille principale */}
       <div className="grid lg:grid-cols-3 gap-6">
-        {/* Formulaire */}
         <div className="lg:col-span-2">
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
             <GenerationForm onSuccess={handleSuccess} />
           </div>
         </div>
 
-        {/* Sidebar informations */}
         <div className="space-y-6">
-          {/* Quota restant */}
           {quota && (
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-5">
               <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
@@ -81,32 +73,18 @@ export default function GeneratePage() {
             </div>
           )}
 
-          {/* Conseils */}
           <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 rounded-xl p-5">
             <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-              <span>💡</span> Conseils pour un meilleur résultat
+              <span>💡</span> Conseils
             </h3>
             <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-              <li className="flex items-start gap-2">
-                <span className="text-indigo-500">✓</span>
-                Soyez précis dans votre sujet
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-indigo-500">✓</span>
-                Choisissez la niche la plus adaptée
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-indigo-500">✓</span>
-                Utilisez les effets sonores pour plus d'immersion
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-indigo-500">✓</span>
-                Testez différentes durées
-              </li>
+              <li className="flex items-start gap-2">✓ Soyez précis dans votre sujet</li>
+              <li className="flex items-start gap-2">✓ Choisissez la niche la plus adaptée</li>
+              <li className="flex items-start gap-2">✓ Utilisez les effets sonores</li>
+              <li className="flex items-start gap-2">✓ Testez différentes durées</li>
             </ul>
           </div>
 
-          {/* Lien vers l'historique */}
           <button
             onClick={() => router.push('/dashboard/history')}
             className="w-full text-center py-2 text-sm text-indigo-600 hover:text-indigo-700 transition"
@@ -116,15 +94,10 @@ export default function GeneratePage() {
         </div>
       </div>
 
-      {/* Message de succès temporaire */}
       {generationId && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg"
-        >
+        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
           ✅ Génération terminée ! Redirection...
-        </motion.div>
+        </div>
       )}
     </div>
   )
