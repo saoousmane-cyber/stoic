@@ -23,29 +23,6 @@ export const metadata: Metadata = {
     template: '%s | AURA & LOGOS',
   },
   description: 'Créez automatiquement des vidéos et audios pour YouTube, TikTok et podcasts.',
-  openGraph: {
-    type: 'website',
-    locale: 'fr_FR',
-    url: APP_URL,
-    siteName: 'AURA & LOGOS',
-    title: 'AURA & LOGOS - Générateur de contenu pour créateurs',
-    description: 'Créez des vidéos qui captivent. Sans monter. Sans tourner. Sans stress.',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'AURA & LOGOS',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'AURA & LOGOS - Générateur de contenu pour créateurs',
-    description: 'Créez des vidéos qui captivent.',
-    images: ['/og-image.jpg'],
-    creator: '@auraandlogos',
-  },
 }
 
 export default function RootLayout({
