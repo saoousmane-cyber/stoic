@@ -1,6 +1,6 @@
-// AURA & LOGOS - Dashboard utilisateur avec section bonus
-
 'use client'
+
+// AURA & LOGOS - Dashboard utilisateur avec section bonus
 
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'

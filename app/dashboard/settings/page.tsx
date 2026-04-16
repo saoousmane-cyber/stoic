@@ -1,7 +1,7 @@
+'use client'
+
 // AURA & LOGOS - Paramètres utilisateur
 // /dashboard/settings
-
-'use client'
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'

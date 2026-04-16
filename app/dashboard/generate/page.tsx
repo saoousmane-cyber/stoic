@@ -1,8 +1,8 @@
+'use client'
+
 // AURA & LOGOS - Page de génération de contenu
 // /dashboard/generate
-'use client'
 export const dynamic = 'force-dynamic'
-
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'

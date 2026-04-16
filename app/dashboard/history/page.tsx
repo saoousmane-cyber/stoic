@@ -1,7 +1,7 @@
+'use client'
+
 // AURA & LOGOS - Historique des générations
 // /dashboard/history
-
-'use client'
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'

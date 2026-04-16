@@ -1,7 +1,7 @@
+'use client'
+
 // AURA & LOGOS - Page de gestion de l'essai prépayé
 // /dashboard/trial
-
-'use client'
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'

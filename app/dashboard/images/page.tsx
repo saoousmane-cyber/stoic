@@ -1,7 +1,7 @@
+'use client'
+
 // AURA & LOGOS - Bibliothèque d'images
 // /dashboard/images
-
-'use client'
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
