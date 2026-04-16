@@ -1,7 +1,7 @@
 // AURA & LOGOS - API d'historique des générations
 // GET /api/user/history - Récupérer l'historique
 // DELETE /api/user/history - Supprimer tout l'historique
-export const dynamic = 'force-dynamic'
+
 
 export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
