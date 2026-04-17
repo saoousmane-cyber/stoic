@@ -1,10 +1,8 @@
 'use client'
 
-// AURA & LOGOS - Dashboard utilisateur avec section bonus
-
-import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { BonusBanner } from '@/components/bonus/bonus-banner'
 import { BonusSection } from '@/components/dashboard/bonus-section'
 import { GenerationForm } from '@/components/dashboard/generation-form'
@@ -18,11 +16,6 @@ export default function DashboardPage() {
   const { quota } = useQuota()
   const [activeTab, setActiveTab] = useState<'generate' | 'history'>('generate')
 
-  if (status === 'unauthenticated') {
-    router.push('/api/auth/signin')
-    return null
-  }
-
   if (status === 'loading') {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -31,18 +24,20 @@ export default function DashboardPage() {
     )
   }
 
+  if (status === 'unauthenticated') {
+    router.push('/api/auth/signin')
+    return null
+  }
+
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="container mx-auto px-4">
-        {/* Bannière bonus (visible uniquement si bonus actif) */}
         <div className="mb-6">
           <BonusBanner />
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Colonne principale */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Onglets */}
             <div className="flex gap-2 border-b border-gray-200 dark:border-gray-700">
               <button
                 onClick={() => setActiveTab('generate')}
@@ -66,7 +61,6 @@ export default function DashboardPage() {
               </button>
             </div>
 
-            {/* Contenu des onglets */}
             {activeTab === 'generate' ? (
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
                 <GenerationForm />
@@ -78,9 +72,7 @@ export default function DashboardPage() {
             )}
           </div>
 
-          {/* Colonne latérale */}
           <div className="space-y-6">
-            {/* Quota */}
             {quota && (
               <QuotaDisplay
                 used={quota.used}
@@ -89,11 +81,7 @@ export default function DashboardPage() {
                 onUpgrade={() => router.push('/pricing')}
               />
             )}
-
-            {/* Section Bonus (carte détaillée) */}
             <BonusSection />
-
-            {/* Stats supplémentaires */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
               <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
                 💡 Astuce du jour
