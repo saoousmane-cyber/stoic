@@ -2,7 +2,6 @@
 // Présentation du produit, des niches, et appel à l'action
 
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function HomePage() {
   return (
@@ -38,7 +37,7 @@ export default function HomePage() {
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/api/auth/login"
+                href="/api/auth/signin"
                 className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg"
               >
                 Commencer gratuitement
@@ -178,7 +177,7 @@ export default function HomePage() {
                 <li className="flex items-center gap-2 text-sm text-gray-400">✗ Qualité standard</li>
               </ul>
               <Link
-                href="/api/auth/login"
+                href="/api/auth/signin"
                 className="block text-center py-3 px-4 border border-indigo-600 text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition"
               >
                 Commencer gratuitement
@@ -200,7 +199,7 @@ export default function HomePage() {
                 <li className="flex items-center gap-2 text-sm">✓ Pack images inclus</li>
               </ul>
               <Link
-                href="/api/auth/login"
+                href="/api/auth/signin"
                 className="block text-center py-3 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition"
               >
                 Passer à Pro
